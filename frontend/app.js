@@ -3,6 +3,7 @@ const axios = require('axios');
 
 const app = express();
 const PORT = 3000;
+const BACKEND_URL = process.env.BACKEND_URL || 'http://backend:8000';
 
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true })); 
@@ -18,7 +19,7 @@ app.post('/submit', async (req, res) => {
 
     try {
 
-        const response = await axios.post('http://backend-host:8000/process', {
+        const response = await axios.post(`${BACKEND_URL}/process`, {
             name: name,
             email: email
         });
