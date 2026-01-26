@@ -13,11 +13,7 @@ spec:
     spec:
       containers:
       - name: mongo
-        image: mongo:latest
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
+        image: amandevops001/assignment7-mongo:tagname
         ports:
         - containerPort: 27017
 ---

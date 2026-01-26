@@ -1,0 +1,58 @@
+# NodePort services for external access to Assignment7 application
+# Use this file if you want to expose services externally without port-forwarding
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-nodeport
+spec:
+  selector:
+    app: frontend
+  ports:
+  - port: 3000
+    targetPort: 3000
+    nodePort: 30001  # External port: 30001
+  type: NodePort
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-nodeport
+spec:
+  selector:
+    app: backend
+  ports:
+  - port: 8000
+    targetPort: 8000
+    nodePort: 30002  # External port: 30002
+  type: NodePort
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-nodeport
+spec:
+  selector:
+    app: mongo
+  ports:
+  - port: 27017
+    targetPort: 27017
+    nodePort: 30003  # External port: 30003
+  type: NodePort
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-express-nodeport
+spec:
+  selector:
+    app: mongo-express
+  ports:
+  - port: 8081
+    targetPort: 8081
+    nodePort: 30004  # External port: 30004
+  type: NodePort

@@ -17,7 +17,8 @@ spec:
         command: ['sh', '-c', 'until nc -z backend 8000; do echo waiting for backend; sleep 2; done']
       containers:
       - name: frontend
-        image: frontend:latest
+        image: amandevops001/assignment7-frontend:tagname
+        imagePullPolicy: Always
         ports:
         - containerPort: 3000
         env:
