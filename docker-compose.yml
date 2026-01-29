@@ -1,0 +1,56 @@
+version: '3.8'
+services:
+  mongo:
+    image: mongo:4.4
+    hostname: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - app-network
+
+  backend:
+    build: backend
+    hostname: backend-host
+    volumes:
+      - ./backend:/app
+    environment:
+      - MONGO_URL=mongodb://mongo:27017
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongo
+    networks:
+      - app-network
+
+  frontend:
+    build: frontend
+    hostname: frontend-host
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - BACKEND_URL=http://backend-host:8000
+      
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+  mongo-express:
+    image: mongo-express:latest
+    hostname: mongo-express
+    ports:
+      - "8081:8081"
+    environment:
+      - ME_CONFIG_MONGODB_URL=mongodb://mongo:27017
+      - ME_CONFIG_BASICAUTH_USERNAME=admin
+      - ME_CONFIG_BASICAUTH_PASSWORD=password
+    depends_on:
+      - mongo
+    networks:
+      - app-network
+
+networks:
+  app-network: {}

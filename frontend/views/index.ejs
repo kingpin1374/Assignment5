@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Submit Information</title>
+</head>
+<body>
+    <h1>Submit Your Information</h1>
+    
+    <form action="/submit" method="POST">
+        <div>
+            <label for="name">Name: </label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <br>
+        <div>
+            <label for="email">Email: </label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <% if (result) { %>
+        <hr>
+        <h3>Backend Response:</h3>
+        <p><%= result %></p>
+    <% } %>
+</body>
+</html>
